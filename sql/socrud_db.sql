@@ -38,7 +38,7 @@ create unique index programs_title_uindex
 create table program_subjects
 (
     id             SERIAL PRIMARY KEY,
-    track_id       integer                                                    not null
+    program_id       integer                                                    not null
         constraint subject_tracks_tracks_id_fk
             references programs (id)
             on update cascade on delete cascade,
