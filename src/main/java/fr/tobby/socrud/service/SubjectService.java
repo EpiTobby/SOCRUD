@@ -20,6 +20,7 @@ public class SubjectService {
         this.subjectRepository = subjectRepository;
     }
 
+    @Transactional
     public SubjectModel createSubject(CreateSubjectRequest request){
         SubjectEntity subjectEntity = subjectRepository.save(new SubjectEntity(request.getTitle(), request.getDescription()));
         return SubjectModel.of(subjectEntity);
@@ -35,6 +36,7 @@ public class SubjectService {
         return SubjectModel.of(subjectEntity);
     }
 
+    @Transactional
     public void updateSubject(long subjectId, UpdateSubjectRequest request){
         SubjectEntity subjectEntity = subjectRepository.findById(subjectId).orElseThrow(() -> new SubjectNotFound("No subject found"));
         if (request.getTitle() != null)
@@ -43,6 +45,7 @@ public class SubjectService {
             subjectEntity.setTitle(request.getDescription());
     }
 
+    @Transactional
     public void deleteSubject(long subjectId){
         SubjectEntity subjectEntity = subjectRepository.findById(subjectId).orElseThrow(() -> new SubjectNotFound("No subject found"));
         subjectRepository.delete(subjectEntity);
