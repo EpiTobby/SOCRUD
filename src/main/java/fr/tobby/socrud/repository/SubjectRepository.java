@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface SubjectRepository extends CrudRepository<SubjectEntity, Long> {
     List<SubjectEntity> findAll();
 
-    Optional<SubjectEntity> findById();
+    Optional<SubjectEntity> findById(long id);
 }
