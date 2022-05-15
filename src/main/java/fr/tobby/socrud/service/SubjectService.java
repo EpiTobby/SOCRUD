@@ -42,7 +42,7 @@ public class SubjectService {
         if (request.getTitle() != null)
             subjectEntity.setTitle(request.getTitle());
         if (request.getDescription() != null)
-            subjectEntity.setTitle(request.getDescription());
+            subjectEntity.setDescription(request.getDescription());
     }
 
     @Transactional
