@@ -34,7 +34,7 @@ public class ProgramController {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String getError(ProgramNotFoundException exception) {
-        logger.debug("Error on requrest", exception);
+        logger.debug("Error on request", exception);
         return exception.getMessage();
     }
 }
