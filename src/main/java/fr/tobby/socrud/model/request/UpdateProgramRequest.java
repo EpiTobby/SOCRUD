@@ -25,7 +25,7 @@ public class UpdateProgramRequest {
                 .title(entity.getTitle())
                 .campus(entity.getCampus())
                 .durationMonths(entity.getDurationMonths())
-                .degree(entity.getDeegre().getTitle())
+                .degree(entity.getDegree().getTitle())
                 .price(entity.getPrice())
                 .remotePercentage(entity.getRemotePercentage())
                 .startDate(entity.getStartDate())

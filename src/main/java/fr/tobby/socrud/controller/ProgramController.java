@@ -1,7 +1,10 @@
 package fr.tobby.socrud.controller;
 
+import fr.tobby.socrud.exception.DegreeNotFoundException;
+import fr.tobby.socrud.exception.EntityNotFoundException;
 import fr.tobby.socrud.exception.ProgramNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
+import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
 import fr.tobby.socrud.service.ProgramService;
 import org.slf4j.Logger;
@@ -37,15 +40,21 @@ public class ProgramController {
         programService.deleteById(id);
     }
 
+    @PostMapping(path = "")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProgramModel create(@RequestBody CreateProgramRequest request) {
+        return programService.create(request);
+    }
+
     @PatchMapping(path = "{id}")
     public ProgramModel updateById(@PathVariable("id") Long id, @RequestBody UpdateProgramRequest request) {
         return programService.update(id, request);
     }
 
-    @ExceptionHandler(ProgramNotFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String getError(ProgramNotFoundException exception) {
+    public String getError(EntityNotFoundException exception) {
         logger.debug("Error on request", exception);
         return exception.getMessage();
     }

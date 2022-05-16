@@ -2,8 +2,10 @@ package fr.tobby.socrud.service;
 
 import fr.tobby.socrud.entity.DegreesEntity;
 import fr.tobby.socrud.entity.ProgramEntity;
+import fr.tobby.socrud.exception.DegreeNotFoundException;
 import fr.tobby.socrud.exception.ProgramNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
+import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
 import fr.tobby.socrud.repository.DegreesRepository;
 import fr.tobby.socrud.repository.ProgramRepository;
@@ -37,6 +39,12 @@ public class ProgramService {
         programRepository.deleteById(id);
     }
 
+    public ProgramModel create(CreateProgramRequest request) {
+        ProgramEntity programEntity = ProgramEntity.of(request);
+        programEntity.setDegree(degreesRepository.findByTitle(request.getDegree()).orElseThrow(() -> new DegreeNotFoundException("No degree found with title " + request.getDegree())));
+        return ProgramModel.of(programRepository.save(programEntity));
+    }
+
     @Transactional
     public ProgramModel update(long id, UpdateProgramRequest request) {
         ProgramEntity programEntity = programRepository.findById(id).orElseThrow(() -> new ProgramNotFoundException("No program found with id " + id));
@@ -57,7 +65,7 @@ public class ProgramService {
         }
         if (request.getDegree() != null) {
             DegreesEntity degree = degreesRepository.findByTitle(request.getDegree()).orElseThrow(() -> new ProgramNotFoundException("No degree found with id " + request.getDegree()));
-            programEntity.setDeegre(degree);
+            programEntity.setDegree(degree);
         }
         if (request.getPrice() != null) {
             programEntity.setPrice(request.getPrice());

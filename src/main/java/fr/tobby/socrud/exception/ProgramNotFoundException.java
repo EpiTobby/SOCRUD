@@ -1,6 +1,6 @@
 package fr.tobby.socrud.exception;
 
-public class ProgramNotFoundException extends RuntimeException {
+public class ProgramNotFoundException extends EntityNotFoundException {
     public ProgramNotFoundException() {
     }
 

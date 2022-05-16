@@ -1,6 +1,6 @@
 package fr.tobby.socrud.exception;
 
-public class SubjectNotFoundException extends RuntimeException{
+public class SubjectNotFoundException extends EntityNotFoundException {
     public SubjectNotFoundException() {
     }
 

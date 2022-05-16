@@ -1,8 +1,8 @@
 package fr.tobby.socrud.entity;
 
+import fr.tobby.socrud.model.request.CreateProgramRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,8 +24,8 @@ public class ProgramEntity {
     private String durationMonths;
     @Setter
     @ManyToOne
-    @JoinColumn(name = "deegres")
-    private DegreesEntity deegre;
+    @JoinColumn(name = "degree_id")
+    private DegreesEntity degree;
 
     @Column(name = "tarif")
     private int price;
@@ -38,6 +38,18 @@ public class ProgramEntity {
 
     @Setter
     private String description;
+
+    public static ProgramEntity of(CreateProgramRequest request) {
+        ProgramEntity program = new ProgramEntity();
+        program.setTitle(request.getTitle());
+        program.setCampus(request.getCampus());
+        program.setDurationMonths(request.getDurationMonths());
+        program.setPrice(request.getPrice());
+        program.setRemotePercentage(request.getRemotePercentage());
+        program.setStartDate(request.getStartDate());
+        program.setDescription(request.getDescription());
+        return program;
+    }
 
     public void setRemotePercentage(double remotePercentage){
         if (remotePercentage < 0 || remotePercentage > 100){
