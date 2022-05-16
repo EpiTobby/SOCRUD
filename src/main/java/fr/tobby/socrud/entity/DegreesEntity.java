@@ -5,9 +5,9 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "deegree")
+@Table(name = "degrees")
 @Getter
-public class DeegreeEntity {
+public class DegreesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
