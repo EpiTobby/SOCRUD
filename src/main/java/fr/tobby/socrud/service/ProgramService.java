@@ -26,4 +26,8 @@ public class ProgramService {
         ProgramEntity programEntity = programRepository.findById(id).orElseThrow(() -> new ProgramNotFoundException("No program found with id " + id));
         return ProgramModel.of(programEntity);
     }
+
+    public void deleteById(Long id) {
+        programRepository.deleteById(id);
+    }
 }

@@ -30,6 +30,12 @@ public class ProgramController {
         return programService.getById(id);
     }
 
+    @DeleteMapping(path = "{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable("id") Long id) {
+        programService.deleteById(id);
+    }
+
     @ExceptionHandler(ProgramNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
