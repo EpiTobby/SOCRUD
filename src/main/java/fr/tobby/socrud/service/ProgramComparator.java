@@ -1,27 +1,18 @@
 package fr.tobby.socrud.service;
 
-import fr.tobby.socrud.model.Searchable;
-
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class ProgramComparator implements Comparator<Searchable> {
-    private final Collection<String> keywords;
+final class ProgramComparator extends ProgramComparatorTemplate {
 
     public ProgramComparator(final Collection<String> keywords)
     {
-        this.keywords = keywords;
+        super(keywords);
     }
 
     @Override
-    public int compare(final Searchable o1, final Searchable o2)
-    {
-        return Float.compare(evaluate(o1.getDescription()), evaluate(o2.getDescription()));
-    }
-
-    float evaluate(String input)
+    protected float evaluate(String input)
     {
         input = input.toLowerCase();
         int foundCount = 0;
