@@ -18,16 +18,17 @@ class ProgramComparator implements Comparator<Searchable> {
     @Override
     public int compare(final Searchable o1, final Searchable o2)
     {
-        return 0;
+        return Float.compare(evaluate(o1.getDescription()), evaluate(o2.getDescription()));
     }
 
-    float evaluate(final String input)
+    float evaluate(String input)
     {
+        input = input.toLowerCase();
         int foundCount = 0;
         int occurrences = 0;
         for (final String keyword : keywords)
         {
-            int i = countOccurrences(input, keyword);
+            int i = countOccurrences(input, keyword.toLowerCase());
             if (i > 0)
                 foundCount++;
             occurrences += i;

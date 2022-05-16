@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProgramComparatorTest {
 
@@ -83,5 +83,15 @@ class ProgramComparatorTest {
 
         float result = comparator.evaluate(input);
         assertEquals(6f, result);
+    }
+
+    @Test
+    void shouldReturn0Point5WhenEvaluateIsCalledWithOneKeywordInUppercaseAndOneOccurrence()
+    {
+        String input = "foo bar bar";
+        ProgramComparator comparator = getComparator(List.of("FOO"));
+
+        float result = comparator.evaluate(input);
+        assertEquals(0.5f, result);
     }
 }
