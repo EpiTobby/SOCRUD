@@ -1,6 +1,7 @@
 package fr.tobby.socrud.service;
 
 import fr.tobby.socrud.entity.ProgramEntity;
+import fr.tobby.socrud.exception.ProgramNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
 import fr.tobby.socrud.repository.ProgramRepository;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class ProgramService {
     public Collection<ProgramModel> getAllOrdered() {
         List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
         return programEntities.stream().map(ProgramModel::of).toList();
+    }
+
+    public ProgramModel getById(Long id) {
+        ProgramEntity programEntity = programRepository.findById(id).orElseThrow(() -> new ProgramNotFoundException("No program found with id " + id));
+        return ProgramModel.of(programEntity);
     }
 }
