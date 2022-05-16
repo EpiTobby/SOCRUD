@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class SubjectService {
@@ -28,8 +27,8 @@ public class SubjectService {
     }
 
     public Collection<SubjectModel> getAll(){
-        List<SubjectEntity> subjectEntities = subjectRepository.findAll();
-        return subjectEntities.stream().map(e -> SubjectModel.of(e)).toList();
+        Collection<SubjectEntity> subjectEntities = subjectRepository.findAll();
+        return subjectEntities.stream().map(SubjectModel::of).toList();
     }
 
     @NotNull
