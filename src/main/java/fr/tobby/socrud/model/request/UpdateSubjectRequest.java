@@ -1,11 +1,9 @@
 package fr.tobby.socrud.model.request;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Builder;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
-@Builder
 @Getter
 @JsonAutoDetect
 public class UpdateSubjectRequest {
@@ -18,4 +16,35 @@ public class UpdateSubjectRequest {
         this.title = title;
         this.description = description;
     }
+
+    public static Builder builder()
+    {
+        return new Builder();
+    }
+
+    public static class Builder
+    {
+        @Nullable
+        private String title;
+        @Nullable
+        private String description;
+
+        public UpdateSubjectRequest build()
+        {
+            return new UpdateSubjectRequest(title, description);
+        }
+
+        public Builder title(final String title)
+        {
+            this.title = title;
+            return this;
+        }
+
+        public Builder description(final String description)
+        {
+            this.description = description;
+            return this;
+        }
+    }
+
 }
