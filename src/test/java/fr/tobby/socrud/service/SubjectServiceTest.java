@@ -1,7 +1,6 @@
 package fr.tobby.socrud.service;
 
-import fr.tobby.socrud.exception.SubjectNotFound;
-import fr.tobby.socrud.model.SubjectModel;
+import fr.tobby.socrud.exception.SubjectNotFoundException;
 import fr.tobby.socrud.model.request.CreateSubjectRequest;
 import fr.tobby.socrud.model.request.UpdateSubjectRequest;
 import fr.tobby.socrud.repository.SubjectRepository;
@@ -50,13 +49,12 @@ public class SubjectServiceTest{
 
     @Test
     void testDeleteSubject(){
-        String newDescr = "A better description for subject1";
         CreateSubjectRequest createSubjectRequest = CreateSubjectRequest.builder()
                 .title("subject1")
                 .description("description for subject1")
                 .build();
         long id = subjectService.createSubject(createSubjectRequest).getId();
         subjectService.deleteSubject(id);
-        Assertions.assertThrows(SubjectNotFound.class, () -> subjectService.getById(id));
+        Assertions.assertThrows(SubjectNotFoundException.class, () -> subjectService.getById(id));
     }
 }

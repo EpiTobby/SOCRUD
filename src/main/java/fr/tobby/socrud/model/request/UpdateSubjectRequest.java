@@ -13,4 +13,9 @@ public class UpdateSubjectRequest {
     private final String title;
     @Nullable
     private final String description;
+
+    public UpdateSubjectRequest(@Nullable String title, @Nullable String description) {
+        this.title = title;
+        this.description = description;
+    }
 }

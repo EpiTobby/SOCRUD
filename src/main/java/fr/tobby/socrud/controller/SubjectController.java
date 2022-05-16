@@ -1,6 +1,6 @@
 package fr.tobby.socrud.controller;
 
-import fr.tobby.socrud.exception.SubjectNotFound;
+import fr.tobby.socrud.exception.SubjectNotFoundException;
 import fr.tobby.socrud.model.SubjectModel;
 import fr.tobby.socrud.model.request.CreateSubjectRequest;
 import fr.tobby.socrud.model.request.UpdateSubjectRequest;
@@ -47,10 +47,10 @@ public class SubjectController {
         subjectService.deleteSubject(subjectId);
     }
 
-    @ExceptionHandler(SubjectNotFound.class)
+    @ExceptionHandler(SubjectNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String getError(SubjectNotFound exception) {
+    public String getError(SubjectNotFoundException exception) {
         logger.debug("Error on request", exception);
         return exception.getMessage();
     }

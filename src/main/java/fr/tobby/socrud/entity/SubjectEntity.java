@@ -11,14 +11,15 @@ import javax.persistence.*;
 @Table(name = "subjects")
 @NoArgsConstructor
 @Getter
-@Setter
 public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @Setter
     private String title;
     @NotNull
+    @Setter
     private String description;
 
     public SubjectEntity(@NotNull String title,

@@ -13,4 +13,9 @@ public final class CreateSubjectRequest {
     private final String title;
     @NotNull
     private final String description;
+
+    public CreateSubjectRequest(@NotNull String title, @NotNull String description) {
+        this.title = title;
+        this.description = description;
+    }
 }
