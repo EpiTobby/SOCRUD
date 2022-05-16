@@ -2,6 +2,7 @@ package fr.tobby.socrud.controller;
 
 import fr.tobby.socrud.exception.ProgramNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
+import fr.tobby.socrud.model.request.UpdateProgramRequest;
 import fr.tobby.socrud.service.ProgramService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,11 @@ public class ProgramController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable("id") Long id) {
         programService.deleteById(id);
+    }
+
+    @PatchMapping(path = "{id}")
+    public ProgramModel updateById(@PathVariable("id") Long id, @RequestBody UpdateProgramRequest request) {
+        return programService.update(id, request);
     }
 
     @ExceptionHandler(ProgramNotFoundException.class)

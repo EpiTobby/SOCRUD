@@ -1,37 +1,27 @@
-package fr.tobby.socrud.model;
+package fr.tobby.socrud.model.request;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import fr.tobby.socrud.entity.ProgramEntity;
 import lombok.Builder;
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
-
 
 @Builder
 @Getter
 @JsonAutoDetect
-public final class ProgramModel {
-    private final long id;
-    @NotNull
+public class UpdateProgramRequest {
     private final String title;
-    @NotNull
     private final String campus;
-    @NotNull
     private final String durationMonths;
-    @NotNull
     private final String degree;
-    private final int price;
-    private final double remotePercentage;
-    @NotNull
+    private final Integer price;
+    private final Double remotePercentage;
     private final Date startDate;
-    @NotNull
     private final String description;
 
-    public static ProgramModel of(ProgramEntity entity){
-        return ProgramModel.builder()
-                .id(entity.getId())
+    public static UpdateProgramRequest of(ProgramEntity entity) {
+        return UpdateProgramRequest.builder()
                 .title(entity.getTitle())
                 .campus(entity.getCampus())
                 .durationMonths(entity.getDurationMonths())
