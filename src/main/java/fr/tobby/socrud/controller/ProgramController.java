@@ -1,8 +1,6 @@
 package fr.tobby.socrud.controller;
 
-import fr.tobby.socrud.exception.DegreeNotFoundException;
 import fr.tobby.socrud.exception.EntityNotFoundException;
-import fr.tobby.socrud.exception.ProgramNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
 import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
@@ -30,13 +28,13 @@ public class ProgramController {
     }
 
     @GetMapping(path = "{id}")
-    public ProgramModel getById(@PathVariable("id") Long id) {
+    public ProgramModel getById(@PathVariable("id") long id) {
         return programService.getById(id);
     }
 
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteById(@PathVariable("id") long id) {
         programService.deleteById(id);
     }
 
@@ -47,7 +45,7 @@ public class ProgramController {
     }
 
     @PatchMapping(path = "{id}")
-    public ProgramModel updateById(@PathVariable("id") Long id, @RequestBody UpdateProgramRequest request) {
+    public ProgramModel updateById(@PathVariable("id") long id, @RequestBody UpdateProgramRequest request) {
         return programService.update(id, request);
     }
 
