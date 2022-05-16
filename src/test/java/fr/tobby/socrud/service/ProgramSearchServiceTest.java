@@ -1,8 +1,10 @@
 package fr.tobby.socrud.service;
 
 import fr.tobby.socrud.model.Searchable;
+import fr.tobby.socrud.repository.ProgramRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +18,7 @@ class ProgramSearchServiceTest {
     @BeforeEach
     void setUp()
     {
-        searchService = new ProgramSearchService();
+        searchService = new ProgramSearchService(Mockito.mock(ProgramRepository.class));
     }
 
     private Collection<Searchable> getSearchables()
