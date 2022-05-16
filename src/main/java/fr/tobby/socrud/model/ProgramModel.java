@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 @Getter
 @JsonAutoDetect
-public final class ProgramModel {
+public final class ProgramModel implements Searchable {
     private final long id;
     @NotNull
     private final String title;

@@ -4,6 +4,7 @@ import fr.tobby.socrud.exception.EntityNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
 import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
+import fr.tobby.socrud.service.ProgramSearchService;
 import fr.tobby.socrud.service.ProgramService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,20 +12,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/program")
 public class ProgramController {
     private static final Logger logger = LoggerFactory.getLogger(ProgramController.class);
     private final ProgramService programService;
+    private final ProgramSearchService searchService;
 
-    public ProgramController(ProgramService programService) {
+    public ProgramController(ProgramService programService, final ProgramSearchService searchService) {
         this.programService = programService;
+        this.searchService = searchService;
     }
 
     @GetMapping(path = "")
     public Collection<ProgramModel> getPrograms() {
         return programService.getAllOrdered();
+    }
+
+    @GetMapping("search")
+    public List<ProgramModel> search(@RequestParam("keywords") Collection<String> keywords)
+    {
+        return searchService.search(keywords);
     }
 
     @GetMapping(path = "{id}")
