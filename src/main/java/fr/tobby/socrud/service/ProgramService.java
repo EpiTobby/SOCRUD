@@ -32,10 +32,11 @@ public class ProgramService {
         return programEntities.stream().map(ProgramModel::of).toList();
     }
 
-    public List<ProgramModel> getAllOrdered(@Nullable String campus) {
+    public List<ProgramModel> getAllOrdered(@Nullable String campus, @Nullable String degree) {
         List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
         Predicate<ProgramModel> predicate = model -> {
-            return campus == null || model.getCampus().equals(campus);
+            return (campus == null || model.getCampus().equals(campus))
+                    && (degree == null || model.getDegree().equals(degree));
         };
         return programEntities.stream().map(ProgramModel::of)
                               .filter(predicate)
