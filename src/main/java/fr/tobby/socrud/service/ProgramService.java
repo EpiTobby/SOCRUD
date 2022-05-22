@@ -9,11 +9,13 @@ import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
 import fr.tobby.socrud.repository.DegreesRepository;
 import fr.tobby.socrud.repository.ProgramRepository;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class ProgramService {
@@ -28,6 +30,16 @@ public class ProgramService {
     public Collection<ProgramModel> getAllOrdered() {
         List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
         return programEntities.stream().map(ProgramModel::of).toList();
+    }
+
+    public List<ProgramModel> getAllOrdered(@Nullable String campus) {
+        List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
+        Predicate<ProgramModel> predicate = model -> {
+            return campus == null || model.getCampus().equals(campus);
+        };
+        return programEntities.stream().map(ProgramModel::of)
+                              .filter(predicate)
+                              .toList();
     }
 
     public ProgramModel getById(long id) {

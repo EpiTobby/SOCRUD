@@ -27,8 +27,8 @@ public class ProgramController {
     }
 
     @GetMapping(path = "")
-    public Collection<ProgramModel> getPrograms() {
-        return programService.getAllOrdered();
+    public Collection<ProgramModel> getPrograms(@RequestParam(name = "campus", required = false) String campus) {
+        return programService.getAllOrdered(campus);
     }
 
     @GetMapping("search")
