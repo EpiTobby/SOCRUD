@@ -28,7 +28,7 @@ create table programs
             on update cascade on delete cascade,
     tarif             integer,
     remote_percentage integer,
-    "startDate"       date,
+    start_date       date,
     description       text
 );
 
