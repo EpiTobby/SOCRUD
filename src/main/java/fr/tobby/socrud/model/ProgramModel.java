@@ -2,11 +2,12 @@ package fr.tobby.socrud.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import fr.tobby.socrud.entity.ProgramEntity;
+import fr.tobby.socrud.entity.ProgramSubjectEntity;
 import lombok.Builder;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
+import java.util.*;
 
 
 @Builder
@@ -28,17 +29,28 @@ public final class ProgramModel implements Searchable {
     private final Date startDate;
     @NotNull
     private final String description;
+    private final Map<Integer, List<SubjectModel>> subjects;
 
-    public static ProgramModel of(ProgramEntity entity){
+    public static ProgramModel of(ProgramEntity entity)
+    {
+        Map<Integer, List<SubjectModel>> subjects = new HashMap<>();
+        for (final ProgramSubjectEntity subject : entity.getSubjects())
+        {
+            if (!subjects.containsKey(subject.getSemester()))
+                subjects.put(subject.getSemester(), new ArrayList<>());
+            subjects.get(subject.getSemester()).add(SubjectModel.of(subject.getSubject()));
+        }
         return ProgramModel.builder()
-                .id(entity.getId())
-                .title(entity.getTitle())
-                .campus(entity.getCampus())
-                .durationMonths(entity.getDurationMonths())
-                .degree(entity.getDegree().getTitle())
-                .price(entity.getPrice())
-                .remotePercentage(entity.getRemotePercentage())
-                .startDate(entity.getStartDate())
-                .description(entity.getDescription()).build();
+                           .id(entity.getId())
+                           .title(entity.getTitle())
+                           .campus(entity.getCampus())
+                           .durationMonths(entity.getDurationMonths())
+                           .degree(entity.getDegree().getTitle())
+                           .price(entity.getPrice())
+                           .remotePercentage(entity.getRemotePercentage())
+                           .startDate(entity.getStartDate())
+                           .description(entity.getDescription())
+                           .subjects(subjects)
+                           .build();
     }
 }

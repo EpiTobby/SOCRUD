@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "programs")
@@ -38,6 +39,10 @@ public class ProgramEntity {
 
     @Setter
     private String description;
+
+    @OneToMany
+    @JoinColumn(name = "track_id")
+    private List<ProgramSubjectEntity> subjects;
 
     public static ProgramEntity of(CreateProgramRequest request) {
         ProgramEntity program = new ProgramEntity();
