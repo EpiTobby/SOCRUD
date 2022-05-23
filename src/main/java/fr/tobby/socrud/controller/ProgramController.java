@@ -1,9 +1,11 @@
 package fr.tobby.socrud.controller;
 
+import com.lowagie.text.DocumentException;
 import fr.tobby.socrud.exception.EntityNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
 import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
+import fr.tobby.socrud.service.PDFExporter;
 import fr.tobby.socrud.service.ProgramSearchService;
 import fr.tobby.socrud.service.ProgramService;
 import org.slf4j.Logger;
@@ -11,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,6 +39,16 @@ public class ProgramController {
     public List<ProgramModel> search(@RequestParam("keywords") Collection<String> keywords)
     {
         return searchService.search(keywords);
+    }
+
+    @GetMapping("export/{id}")
+    public void exportToPDF(@PathVariable("id") long id, HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=programs.pdf");
+
+        ProgramModel programModel = programService.getById(id);
+
+        PDFExporter.export(response, programModel);
     }
 
     @GetMapping(path = "{id}")
