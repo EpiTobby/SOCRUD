@@ -36,9 +36,9 @@ public final class ProgramModel implements Searchable {
         Map<Integer, List<SubjectModel>> subjects = new HashMap<>();
         for (final ProgramSubjectEntity subject : entity.getSubjects())
         {
-            if (!subjects.containsKey(subject.getSemester()))
-                subjects.put(subject.getSemester(), new ArrayList<>());
-            subjects.get(subject.getSemester()).add(SubjectModel.of(subject.getSubject()));
+            if (!subjects.containsKey(subject.getSemesterIndex()))
+                subjects.put(subject.getSemesterIndex(), new ArrayList<>());
+            subjects.get(subject.getSemesterIndex()).add(SubjectModel.of(subject.getSubject()));
         }
         return ProgramModel.builder()
                            .id(entity.getId())

@@ -41,7 +41,7 @@ public class ProgramEntity {
     private String description;
 
     @OneToMany
-    @JoinColumn(name = "track_id")
+    @JoinColumn(name = "program_id")
     private List<ProgramSubjectEntity> subjects;
 
     public static ProgramEntity of(CreateProgramRequest request) {

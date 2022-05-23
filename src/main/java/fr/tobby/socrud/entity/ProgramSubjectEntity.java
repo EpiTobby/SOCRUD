@@ -14,12 +14,12 @@ public class ProgramSubjectEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "track_id")
+    @JoinColumn(name = "program_id")
     private ProgramEntity program;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private SubjectEntity subject;
 
-    private int semester;
+    private int semesterIndex;
 }
