@@ -1,3 +1,7 @@
+CREATE DATABASE socrud;
+
+\c socrud;
+
 create table subjects
 (
     id          serial
