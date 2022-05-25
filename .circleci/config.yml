@@ -4,6 +4,7 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@1.7.0
+  sonarcloud: sonarsource/sonarcloud@1.1.0
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -36,6 +37,13 @@ jobs:
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
             docker build -t gabray/socrud .
             docker push gabray/socrud:latest
+  analyze:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - sonarcloud/scan:
+          sonar_token_variable_name: SONARCLOUD_TOKEN 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -44,3 +52,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - analyze
