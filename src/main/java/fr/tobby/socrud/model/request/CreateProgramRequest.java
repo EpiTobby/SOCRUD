@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import fr.tobby.socrud.entity.ProgramEntity;
 import lombok.Builder;
 import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -19,6 +21,7 @@ public class CreateProgramRequest {
     private final Double remotePercentage;
     private final Date startDate;
     private final String description;
+    private final List<ProgramSubjectRequest> subjects;
 
     public static CreateProgramRequest of(ProgramEntity entity) {
         return CreateProgramRequest.builder()

@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -28,6 +29,8 @@ public class UpdateProgramRequest {
     private final Date startDate;
     @Nullable
     private final String description;
+    @Nullable
+    private final List<ProgramSubjectRequest> subjects;
 
     public static UpdateProgramRequest of(ProgramEntity entity) {
         return UpdateProgramRequest.builder()
