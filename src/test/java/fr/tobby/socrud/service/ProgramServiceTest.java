@@ -2,6 +2,7 @@ package fr.tobby.socrud.service;
 
 import fr.tobby.socrud.entity.DegreesEntity;
 import fr.tobby.socrud.entity.SubjectEntity;
+import fr.tobby.socrud.exception.SubjectNotFoundException;
 import fr.tobby.socrud.model.ProgramModel;
 import fr.tobby.socrud.model.request.CreateProgramRequest;
 import fr.tobby.socrud.model.request.ProgramSubjectRequest;
@@ -68,6 +69,25 @@ public class ProgramServiceTest {
         ProgramModel programModel = programService.create(createProgramRequest);
         Assertions.assertTrue(programModel.getTitle().equals(title));
         Assertions.assertEquals(1, programModel.getSubjects().size());
+    }
+
+    @Test
+    void testCreateProgramWithNonExistingSubject() {
+        String title = "Web Developer School";
+        CreateProgramRequest createProgramRequest = CreateProgramRequest.builder()
+                .title(title)
+                .description("School to become a Web Developer")
+                .campus("Paris")
+                .degree("MASTER")
+                .durationMonths(9)
+                .price(500)
+                .remotePercentage(50.0)
+                .startDate(Date.valueOf("2024-06-06"))
+                .subjects(new ArrayList<ProgramSubjectRequest>() {{
+                    add(ProgramSubjectRequest.builder().subjectId(Long.valueOf(5)).semesterIndex(1).build());
+                }})
+                .build();
+        Assertions.assertThrows(SubjectNotFoundException.class, () -> programService.create(createProgramRequest));
     }
 
     @Test
