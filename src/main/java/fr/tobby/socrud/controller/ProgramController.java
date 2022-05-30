@@ -24,10 +24,12 @@ public class ProgramController {
     private static final Logger logger = LoggerFactory.getLogger(ProgramController.class);
     private final ProgramService programService;
     private final ProgramSearchService searchService;
+    private final PDFExporter pdfExporter;
 
-    public ProgramController(ProgramService programService, final ProgramSearchService searchService) {
+    public ProgramController(ProgramService programService, final ProgramSearchService searchService, final PDFExporter pdfExporter) {
         this.programService = programService;
         this.searchService = searchService;
+        this.pdfExporter = pdfExporter;
     }
 
     @GetMapping(path = "")
@@ -36,8 +38,7 @@ public class ProgramController {
     }
 
     @GetMapping("search")
-    public List<ProgramModel> search(@RequestParam("keywords") Collection<String> keywords)
-    {
+    public List<ProgramModel> search(@RequestParam("keywords") Collection<String> keywords) {
         return searchService.search(keywords);
     }
 
@@ -48,7 +49,7 @@ public class ProgramController {
 
         ProgramModel programModel = programService.getById(id);
 
-        PDFExporter.export(response, programModel);
+        this.pdfExporter.exportProgram(response.getOutputStream(), programModel);
     }
 
     @GetMapping(path = "{id}")

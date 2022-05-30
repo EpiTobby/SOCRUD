@@ -7,18 +7,20 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import fr.tobby.socrud.model.ProgramModel;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
+import java.io.OutputStream;
 
+@Service
 public class PDFExporter {
 
-    private static void writeProgramInformation(Document document, ProgramModel programModel) throws DocumentException {
-        PdfPTable table = new PdfPTable(2);
-        table.setWidthPercentage(100);
-        table.setSpacingBefore(10);
+    public PDFExporter() {
+    }
 
+    private static void writeTableLine(PdfPTable table, String label, String value) throws DocumentException {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(Color.DARK_GRAY);
         cell.setPadding(5);
@@ -32,50 +34,30 @@ public class PDFExporter {
         Font fontContent = FontFactory.getFont(FontFactory.HELVETICA);
         fontContent.setColor(Color.BLACK);
 
-        cell.setPhrase(new Phrase("Titre", font));
+        cell.setPhrase(new Phrase(label, font));
         table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getTitle(), fontContent));
+        contentCell.setPhrase(new Phrase(value, fontContent));
         table.addCell(contentCell);
+    }
 
-        cell.setPhrase(new Phrase("Description", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getDescription(), fontContent));
-        table.addCell(contentCell);
+    private void writeProgramInformation(Document document, ProgramModel programModel) throws DocumentException {
+        PdfPTable table = new PdfPTable(2);
+        table.setWidthPercentage(100);
+        table.setSpacingBefore(10);
 
-        cell.setPhrase(new Phrase("Campus", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getCampus(), fontContent));
-        table.addCell(contentCell);
-
-        cell.setPhrase(new Phrase("Durée", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getDurationMonths(), fontContent));
-        table.addCell(contentCell);
-
-        cell.setPhrase(new Phrase("Type", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getDegree(), fontContent));
-        table.addCell(contentCell);
-
-        cell.setPhrase(new Phrase("Tarif", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(String.valueOf(programModel.getPrice()), fontContent));
-        table.addCell(contentCell);
-
-        cell.setPhrase(new Phrase("Présentiel", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(String.valueOf(programModel.getRemotePercentage()), fontContent));
-        table.addCell(contentCell);
-
-        cell.setPhrase(new Phrase("Début", font));
-        table.addCell(cell);
-        contentCell.setPhrase(new Phrase(programModel.getStartDate().toString(), fontContent));
-        table.addCell(contentCell);
+        writeTableLine(table, "Titre", programModel.getTitle());
+        writeTableLine(table, "Description", programModel.getDescription());
+        writeTableLine(table, "Campus", programModel.getCampus());
+        writeTableLine(table, "Durée", programModel.getDurationMonths());
+        writeTableLine(table, "Type", programModel.getDegree());
+        writeTableLine(table, "Tarif", String.valueOf(programModel.getPrice()));
+        writeTableLine(table, "Présentiel", String.valueOf(programModel.getRemotePercentage()));
+        writeTableLine(table, "Début", programModel.getStartDate().toString());
 
         document.add(table);
     }
 
-    private static void writeSemestersData(Document document, ProgramModel programModel) throws DocumentException {
+    private void writeSemestersData(Document document, ProgramModel programModel) throws DocumentException {
         programModel.getSubjects().forEach((semester, subjects) -> {
             Paragraph semesterTitle = new Paragraph("Semestre " + semester, FontFactory.getFont(FontFactory.HELVETICA_BOLD));
 
@@ -90,9 +72,9 @@ public class PDFExporter {
         });
     }
 
-    public static void export(HttpServletResponse response, ProgramModel programModel) throws DocumentException, IOException {
+    public void exportProgram(OutputStream outputStream, ProgramModel programModel) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
-        PdfWriter.getInstance(document, response.getOutputStream());
+        PdfWriter.getInstance(document, outputStream);
 
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
