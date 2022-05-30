@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 @Builder
 @Getter
 @JsonAutoDetect
-public class ProgramSubjectRequest {
+public final class ProgramSubjectRequest {
     @NotNull
-    private final Integer subjectId;
+    private final Long subjectId;
     @NotNull
     private final Integer semesterIndex;
 }
