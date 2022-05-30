@@ -55,7 +55,7 @@ public class ProgramService {
         ProgramEntity programEntity = programRepository.save(ProgramEntity.of(request));
         programEntity.setDegree(degreesRepository.findByTitle(request.getDegree()).orElseThrow(() -> new DegreeNotFoundException("No degree found with title " + request.getDegree())));
         request.getSubjects().stream().forEach(m -> {
-            SubjectEntity subjectEntity =subjectRepository.findById(m.getSubjectId()).orElseThrow(() -> new SubjectNotFoundException("No subject found"));
+            SubjectEntity subjectEntity = subjectRepository.findById(m.getSubjectId()).orElseThrow(() -> new SubjectNotFoundException("No subject found"));
             programEntity.getSubjects().add(programSubjectRepository.save(new ProgramSubjectEntity(programEntity, subjectEntity, m.getSemesterIndex())));
         });
         return ProgramModel.of(programEntity);
@@ -89,24 +89,23 @@ public class ProgramService {
         if (request.getRemotePercentage() != null) {
             programEntity.setRemotePercentage(request.getRemotePercentage());
         }
-        if (request.getSubjects() != null){
-            updateProgramSubjects(programEntity,request.getSubjects());
+        if (request.getSubjects() != null) {
+            updateProgramSubjects(programEntity, request.getSubjects());
         }
-        if (request.getSubjectsToRemoveFromProgram() != null){
+        if (request.getSubjectsToRemoveFromProgram() != null) {
             programEntity.setSubjects(programEntity.getSubjects().stream().filter(e -> !request.getSubjectsToRemoveFromProgram()
                     .contains(e.getSubject().getId())).toList());
         }
         return ProgramModel.of(programEntity);
     }
 
-    private void updateProgramSubjects(ProgramEntity programEntity, List<ProgramSubjectRequest> programSubjects){
+    private void updateProgramSubjects(ProgramEntity programEntity, List<ProgramSubjectRequest> programSubjects) {
         programSubjects.stream().forEach(m -> {
             Optional<ProgramSubjectEntity> programSubjectEntity = programEntity.getSubjects().stream().filter(e -> e.getSubject().getId() == m.getSubjectId()).findAny();
-            if (programSubjectEntity.isPresent()){
+            if (programSubjectEntity.isPresent()) {
                 programSubjectEntity.get().setSemesterIndex(m.getSemesterIndex());
-            }
-            else{
-                SubjectEntity subjectEntity =subjectRepository.findById(m.getSubjectId()).orElseThrow(() -> new SubjectNotFoundException("No subject found"));
+            } else {
+                SubjectEntity subjectEntity = subjectRepository.findById(m.getSubjectId()).orElseThrow(() -> new SubjectNotFoundException("No subject found"));
                 programEntity.getSubjects().add(programSubjectRepository.save(new ProgramSubjectEntity(programEntity, subjectEntity, m.getSemesterIndex())));
             }
         });
