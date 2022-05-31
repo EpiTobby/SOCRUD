@@ -1,5 +1,6 @@
 package fr.tobby.socrud.controller;
 
+import fr.tobby.socrud.exception.ConnectionFailedException;
 import fr.tobby.socrud.model.request.CreateAccountRequest;
 import fr.tobby.socrud.model.request.LoginRequest;
 import fr.tobby.socrud.model.response.LoginResponse;
@@ -36,5 +37,13 @@ public class AdminController {
     @ApiResponse(responseCode = "201", description = "Create admin account succeed")
     public void createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
         adminService.create(createAccountRequest);
+    }
+
+    @ExceptionHandler(ConnectionFailedException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String getError(ConnectionFailedException exception) {
+        logger.debug("Error on request", exception);
+        return exception.getMessage();
     }
 }

@@ -2,14 +2,16 @@ package fr.tobby.socrud.model.request;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Builder;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
+@Builder
 @Getter
 @JsonAutoDetect
-public class LoginRequest {
+public final class LoginRequest {
     @NotNull
-    private String login;
+    private final String login;
     @NotNull
-    private String password;
+    private final String password;
 }

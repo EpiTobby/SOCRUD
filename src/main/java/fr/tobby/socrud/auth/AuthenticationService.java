@@ -9,23 +9,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
 
 @Component
 public class AuthenticationService implements UserDetailsService {
 
     private final AdminRepository repository;
 
-    public AuthenticationService(final AdminRepository repository)
-    {
+    public AuthenticationService(final AdminRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException
-    {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         AdminEntity admin = repository.findByLogin(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return new UserDetailsImpl(
                 admin.getId(),
