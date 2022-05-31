@@ -11,10 +11,7 @@ import fr.tobby.socrud.repository.DegreesRepository;
 import fr.tobby.socrud.repository.ProgramRepository;
 import fr.tobby.socrud.repository.ProgramSubjectRepository;
 import fr.tobby.socrud.repository.SubjectRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -24,6 +21,10 @@ import java.util.List;
 
 @DataJpaTest
 public class ProgramServiceTest {
+    private static long SOCRA_ID;
+    private static long DEVOPS_ID;
+    private static long MANAGEMENT_ID;
+
     private ProgramService programService;
     @Autowired
     private SubjectRepository subjectRepository;
@@ -40,9 +41,9 @@ public class ProgramServiceTest {
     @BeforeAll
     static void fillData(@Autowired DegreesRepository degreesRepository, @Autowired SubjectRepository subjectRepository) {
         degreesRepository.save(new DegreesEntity("MASTER"));
-        subjectRepository.save(new SubjectEntity("SOCRA", "Software Craftmanship"));
-        subjectRepository.save(new SubjectEntity("DEVOPS", "Devops"));
-        subjectRepository.save(new SubjectEntity("MANAGEMENT", "Management"));
+        SOCRA_ID = subjectRepository.save(new SubjectEntity("SOCRA", "Software Craftmanship")).getId();
+        DEVOPS_ID =subjectRepository.save(new SubjectEntity("DEVOPS", "Devops")).getId();
+        MANAGEMENT_ID = subjectRepository.save(new SubjectEntity("MANAGEMENT", "Management")).getId();
     }
 
     @BeforeEach
@@ -62,13 +63,13 @@ public class ProgramServiceTest {
                 .price(500)
                 .remotePercentage(50.0)
                 .startDate(Date.valueOf("2024-06-06"))
-                .subjects(new ArrayList<ProgramSubjectRequest>() {{
-                    add(ProgramSubjectRequest.builder().subjectId(Long.valueOf(1)).semesterIndex(1).build());
+                .subjects(new ArrayList<>() {{
+                    add(ProgramSubjectRequest.builder().subjectId(SOCRA_ID).semesterIndex(1).build());
                 }})
                 .build();
         ProgramModel programModel = programService.create(createProgramRequest);
         Assertions.assertTrue(programModel.getTitle().equals(title));
-        Assertions.assertEquals(1, programModel.getSubjects().size());
+        Assertions.assertEquals(1, programModel.getSubjects().get(1).size());
     }
 
     @Test
@@ -83,8 +84,8 @@ public class ProgramServiceTest {
                 .price(500)
                 .remotePercentage(50.0)
                 .startDate(Date.valueOf("2024-06-06"))
-                .subjects(new ArrayList<ProgramSubjectRequest>() {{
-                    add(ProgramSubjectRequest.builder().subjectId(Long.valueOf(5)).semesterIndex(1).build());
+                .subjects(new ArrayList<>() {{
+                    add(ProgramSubjectRequest.builder().subjectId(8L).semesterIndex(1).build());
                 }})
                 .build();
         Assertions.assertThrows(SubjectNotFoundException.class, () -> programService.create(createProgramRequest));
@@ -103,22 +104,22 @@ public class ProgramServiceTest {
                 .remotePercentage(50.0)
                 .startDate(Date.valueOf("2024-06-06"))
                 .subjects(new ArrayList<ProgramSubjectRequest>() {{
-                    add(ProgramSubjectRequest.builder().subjectId(Long.valueOf(1)).semesterIndex(1).build());
-                    add(ProgramSubjectRequest.builder().subjectId(Long.valueOf(2)).semesterIndex(1).build());
+                    add(ProgramSubjectRequest.builder().subjectId(SOCRA_ID).semesterIndex(1).build());
+                    add(ProgramSubjectRequest.builder().subjectId(DEVOPS_ID).semesterIndex(1).build());
                 }})
                 .build();
         ProgramModel programModel = programService.create(createProgramRequest);
         UpdateProgramRequest updateProgramRequest = UpdateProgramRequest.builder()
                 .title(newTitle)
                 .subjects(List.of(ProgramSubjectRequest.builder()
-                                .subjectId(Long.valueOf(2))
+                                .subjectId(DEVOPS_ID)
                                 .semesterIndex(2)
                                 .build(),
                         ProgramSubjectRequest.builder()
-                                .subjectId(Long.valueOf(3))
+                                .subjectId(MANAGEMENT_ID)
                                 .semesterIndex(2)
                                 .build()))
-                .subjectsToRemoveFromProgram(List.of(Long.valueOf(1)))
+                .subjectsToRemoveFromProgram(List.of(SOCRA_ID))
                 .build();
         programModel = programService.update(programModel.getId(), updateProgramRequest);
         Assertions.assertTrue(programModel.getTitle().equals(newTitle));
@@ -126,5 +127,10 @@ public class ProgramServiceTest {
         Assertions.assertFalse(programModel.getSubjects().get(2).stream().filter(s -> s.getTitle().equals("DEVOPS")).toList().isEmpty());
         Assertions.assertFalse(programModel.getSubjects().get(2).stream().filter(s -> s.getTitle().equals("MANAGEMENT")).toList().isEmpty());
         Assertions.assertFalse(programModel.getSubjects().containsKey(1));
+    }
+
+    @AfterEach
+    void deleteData(){
+        programRepository.deleteAll();
     }
 }

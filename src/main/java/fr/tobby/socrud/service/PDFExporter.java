@@ -48,7 +48,7 @@ public class PDFExporter {
         writeTableLine(table, "Titre", programModel.getTitle());
         writeTableLine(table, "Description", programModel.getDescription());
         writeTableLine(table, "Campus", programModel.getCampus());
-        writeTableLine(table, "Durée", programModel.getDurationMonths());
+        writeTableLine(table, "Durée", programModel.getDurationMonths().toString());
         writeTableLine(table, "Type", programModel.getDegree());
         writeTableLine(table, "Tarif", String.valueOf(programModel.getPrice()));
         writeTableLine(table, "Présentiel", String.valueOf(programModel.getRemotePercentage()));
