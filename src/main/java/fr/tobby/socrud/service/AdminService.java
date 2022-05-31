@@ -7,7 +7,6 @@ import fr.tobby.socrud.model.request.CreateAccountRequest;
 import fr.tobby.socrud.model.request.LoginRequest;
 import fr.tobby.socrud.model.response.LoginResponse;
 import fr.tobby.socrud.repository.AdminRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -26,7 +25,7 @@ public class AdminService {
     private final PasswordEncoder encoder;
 
     public AdminService(final AdminRepository adminRepository, AuthenticationManager authenticationManager, TokenManager tokenManager, UserDetailsService userDetailsService, PasswordEncoder encoder) {
-        this.adminRepository = adminRepository;
+    this.adminRepository = adminRepository;
         this.authenticationManager = authenticationManager;
         this.tokenManager = tokenManager;
         this.userDetailsService = userDetailsService;
@@ -44,6 +43,6 @@ public class AdminService {
 
     @Transactional
     public void create(CreateAccountRequest request) {
-        adminRepository.save(AdminEntity.of(request.getLogin(), request.getPassword()));
+        adminRepository.save(AdminEntity.of(request.getLogin(), encoder.encode(request.getPassword())));
     }
 }
