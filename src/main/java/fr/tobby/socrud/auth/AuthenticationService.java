@@ -1,6 +1,7 @@
 package fr.tobby.socrud.auth;
 
 import fr.tobby.socrud.entity.AdminEntity;
+import fr.tobby.socrud.repository.AdminRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
