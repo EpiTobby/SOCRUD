@@ -2,6 +2,7 @@ package fr.tobby.socrud.controller;
 
 import fr.tobby.socrud.model.request.CreateAccountRequest;
 import fr.tobby.socrud.model.request.LoginRequest;
+import fr.tobby.socrud.model.response.LoginResponse;
 import fr.tobby.socrud.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,8 +24,8 @@ public class AdminController {
     @PostMapping(path = "login")
     @Operation(summary = "Login")
     @ApiResponse(responseCode = "200", description = "Login success")
-    public void login(@RequestBody LoginRequest loginRequest){
-
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+        return adminService.login(loginRequest);
     }
 
     @PostMapping(path = "create")
