@@ -42,11 +42,15 @@ public class ProgramController {
     }
 
     @GetMapping("search")
+    @Operation(summary = "Search a program with a list of keywords")
+    @ApiResponse(responseCode = "200", description = "Returns the list of programs")
     public List<ProgramModel> search(@RequestParam("keywords") Collection<String> keywords) {
         return searchService.search(keywords);
     }
 
     @GetMapping("export/{id}")
+    @Operation(summary = "Export a program to PDF")
+    @ApiResponse(responseCode = "200", description = "Returns the pdf file of the program")
     public void exportToPDF(@PathVariable("id") long id, HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=programs.pdf");
@@ -57,6 +61,9 @@ public class ProgramController {
     }
 
     @GetMapping(path = "{id}")
+    @Operation(summary = "Get a specific program")
+    @ApiResponse(responseCode = "200", description = "Returns the program")
+    @ApiResponse(responseCode = "404", description = "Program has not been found")
     public ProgramModel getById(@PathVariable("id") long id) {
         return programService.getById(id);
     }
