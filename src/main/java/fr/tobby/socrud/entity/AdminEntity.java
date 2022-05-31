@@ -1,6 +1,5 @@
 package fr.tobby.socrud.entity;
 
-import fr.tobby.socrud.model.request.CreateAccountRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -3,7 +3,7 @@ package fr.tobby.socrud.service;
 import fr.tobby.socrud.auth.TokenManager;
 import fr.tobby.socrud.entity.AdminEntity;
 import fr.tobby.socrud.exception.ConnectionFailedException;
-import fr.tobby.socrud.exception.UserCreationFailed;
+import fr.tobby.socrud.exception.AdminCreationFailed;
 import fr.tobby.socrud.model.request.CreateAccountRequest;
 import fr.tobby.socrud.model.request.LoginRequest;
 import fr.tobby.socrud.model.response.LoginResponse;
@@ -41,7 +41,7 @@ public class AdminService {
     @Transactional
     public void create(CreateAccountRequest request) {
         if (adminRepository.findByLogin(request.getLogin()).isPresent())
-            throw new UserCreationFailed("Username already exists");
+            throw new AdminCreationFailed("Username already exists");
         adminRepository.save(AdminEntity.of(request.getLogin(), encoder.encode(request.getPassword())));
     }
 }
