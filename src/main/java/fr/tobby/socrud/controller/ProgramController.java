@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -63,6 +64,7 @@ public class ProgramController {
 
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Delete a specific program")
     @ApiResponse(responseCode = "404", description = "Program has not been found")
     public void deleteById(@PathVariable("id") long id) {
@@ -71,6 +73,7 @@ public class ProgramController {
 
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Create a program")
     @ApiResponse(responseCode = "201", description = "Return the created program")
     @ApiResponse(responseCode = "404", description = "Program has not been found")
@@ -79,6 +82,7 @@ public class ProgramController {
     }
 
     @PatchMapping(path = "{id}")
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Update a program")
     @ApiResponse(responseCode = "200", description = "Return the updated program")
     @ApiResponse(responseCode = "404", description = "Program has not been found")

@@ -20,17 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtFilter jwtFilter;
 
-    public WebSecurityConfig(final JwtFilter jwtFilter)
-    {
+    public WebSecurityConfig(final JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
 
     @Override
-    protected void configure(final HttpSecurity http) throws Exception
-    {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/admin/**").authenticated()
+                .antMatchers("/admin/create").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -39,15 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder encoder()
-    {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean(name = "myAuthenticationManager")
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception
-    {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 }

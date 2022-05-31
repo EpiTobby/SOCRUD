@@ -25,7 +25,7 @@ public class AdminService {
     private final PasswordEncoder encoder;
 
     public AdminService(final AdminRepository adminRepository, AuthenticationManager authenticationManager, TokenManager tokenManager, UserDetailsService userDetailsService, PasswordEncoder encoder) {
-    this.adminRepository = adminRepository;
+        this.adminRepository = adminRepository;
         this.authenticationManager = authenticationManager;
         this.tokenManager = tokenManager;
         this.userDetailsService = userDetailsService;

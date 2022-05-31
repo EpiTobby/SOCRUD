@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 @Component
@@ -46,7 +47,12 @@ class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_LIST;
+        return List.of(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "admin";
+            }
+        });
     }
 
     @Override

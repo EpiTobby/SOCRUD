@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,15 +25,16 @@ public class AdminController {
     @PostMapping(path = "login")
     @Operation(summary = "Login")
     @ApiResponse(responseCode = "200", description = "Login success")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         return adminService.login(loginRequest);
     }
 
     @PostMapping(path = "create")
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Create admin account")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiResponse(responseCode = "201", description = "Create admin account succeed")
-    public void createAccount(@RequestBody CreateAccountRequest createAccountRequest){
+    public void createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
         adminService.create(createAccountRequest);
     }
 }
