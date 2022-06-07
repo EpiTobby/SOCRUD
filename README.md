@@ -46,6 +46,21 @@ We have implemented 2 design patterns:
 * Builder in models/request/UpdateSubjectRequest.java
 * Template in service/ProgramComparatorTemplate.java
 
+# CICD
+A CICD pipeline is setup and is composed of the following steps:
+- Build the application
+- Run tests
+- Perform code analysis
+- Build a docker image
+- Push the image
+
+The different platforms used to perform these steps are :
+- [CircleCI](https://app.circleci.com/pipelines/github/EpiTobby/SOCRUD)
+- [SonarCloud](https://sonarcloud.io/project/overview?id=EpiTobby_SOCRUD)
+- [Docker Hub](https://hub.docker.com/r/gabray/socrud)
+- [Github Actions](https://github.com/EpiTobby/SOCRUD/actions) (for redundancy on build and tests)
+
+All these platforms, except for docker hub, are linked to this github repository to automatically trigger actions on push and pull requests.
 
 # Authors
 Gabriel Bouhnik\
