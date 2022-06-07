@@ -27,7 +27,7 @@ with the most relevant courses for him.
 
 # Documentation
 All endpoint are documented using Swagger-ui.\
-The Swagger-ui documentation can be found at `/swagger-ui/index.html`.
+The Swagger-ui documentation can be found at `swagger-ui/index.html`.
 
 # Usage
 Run `docker-compose up`\
@@ -35,6 +35,12 @@ This command will download all the necessary images and start the application.
 
 # Tests
 Run `mvn test`
+
+# Design Pattern
+We have implemented 2 design patterns:
+* Builder in models/request/UpdateSubjectRequest.java
+* Template in service/ProgramComparatorTemplate.java
+
 
 # Authors
 Gabriel Bouhnik\
