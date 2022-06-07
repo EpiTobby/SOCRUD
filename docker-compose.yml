@@ -22,6 +22,8 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/socrud"
+      DEFAULT_USERNAME: ${DEFAULT_USERNAME}
+      DEFAULT_PASSWORD: ${DEFAULT_PASSWORD}
 
 networks:
   back: {}
