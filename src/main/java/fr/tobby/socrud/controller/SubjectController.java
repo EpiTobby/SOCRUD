@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -41,6 +42,7 @@ public class SubjectController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Create a subject")
     @ApiResponse(responseCode = "201", description = "Return the created subject")
     public SubjectModel createSubject(@RequestBody CreateSubjectRequest request){
@@ -48,6 +50,7 @@ public class SubjectController {
     }
 
     @PatchMapping("{id}")
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Update a subject")
     @ApiResponse(responseCode = "200", description = "Return the updated subject")
     @ApiResponse(responseCode = "404", description = "Subject has not been found")
@@ -56,6 +59,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('admin')")
     @Operation(summary = "Delete the subject")
     @ApiResponse(responseCode = "200", description = "Subject has been deleted")
     @ApiResponse(responseCode = "404", description = "Subject has not been found")

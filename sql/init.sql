@@ -53,6 +53,13 @@ create table program_subjects
     semester_index integer                                                    not null
 );
 
+create table admins
+(
+    id          SERIAL PRIMARY KEY,
+    login       varchar                                                not null,
+    password    varchar                                                not null
+);
+
 INSERT INTO degrees (title) values ('BTS');
 INSERT INTO degrees (title) values ('LICENCE');
 INSERT INTO degrees (title) values ('MASTER');
