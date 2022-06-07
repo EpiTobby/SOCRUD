@@ -1,24 +1,19 @@
 package fr.tobby.socrud.service;
 
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.List;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import fr.tobby.socrud.model.ProgramModel;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.IOException;
 import java.io.OutputStream;
 
 @Service
 public class PDFExporter {
-
-    public PDFExporter() {
-    }
 
     private static void writeTableLine(PdfPTable table, String label, String value) throws DocumentException {
         PdfPCell cell = new PdfPCell();
@@ -63,16 +58,14 @@ public class PDFExporter {
 
 
             List subjectList = new List(true, false, 10);
-            subjects.forEach(subject -> {
-                subjectList.add(new ListItem(subject.getTitle() + " : " + subject.getDescription()));
-            });
+            subjects.forEach(subject -> subjectList.add(new ListItem(subject.getTitle() + " : " + subject.getDescription())));
 
             semesterTitle.add(subjectList);
             document.add(semesterTitle);
         });
     }
 
-    public void exportProgram(OutputStream outputStream, ProgramModel programModel) throws DocumentException, IOException {
+    public void exportProgram(OutputStream outputStream, ProgramModel programModel) throws DocumentException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, outputStream);
 
