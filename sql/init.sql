@@ -1,3 +1,7 @@
+CREATE DATABASE socrud;
+
+\c socrud;
+
 create table subjects
 (
     id          serial
@@ -28,7 +32,7 @@ create table programs
             on update cascade on delete cascade,
     tarif             integer,
     remote_percentage integer,
-    "startDate"       date,
+    start_date       date,
     description       text
 );
 

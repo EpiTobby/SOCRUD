@@ -1,0 +1,1 @@
+ALTER TABLE programs RENAME "startDate" TO start_date;

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "programs")
@@ -21,7 +23,7 @@ public class ProgramEntity {
     private String campus;
     @Setter
     @Column(name = "duration_months")
-    private String durationMonths;
+    private Integer durationMonths;
     @Setter
     @ManyToOne
     @JoinColumn(name = "degree_id")
@@ -39,6 +41,11 @@ public class ProgramEntity {
     @Setter
     private String description;
 
+    @Setter
+    @OneToMany
+    @JoinColumn(name = "program_id")
+    private List<ProgramSubjectEntity> subjects;
+
     public static ProgramEntity of(CreateProgramRequest request) {
         ProgramEntity program = new ProgramEntity();
         program.setTitle(request.getTitle());
@@ -48,6 +55,7 @@ public class ProgramEntity {
         program.setRemotePercentage(request.getRemotePercentage());
         program.setStartDate(request.getStartDate());
         program.setDescription(request.getDescription());
+        program.setSubjects(new ArrayList<>());
         return program;
     }
 
