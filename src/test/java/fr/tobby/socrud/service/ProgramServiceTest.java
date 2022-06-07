@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-public class ProgramServiceTest {
+class ProgramServiceTest {
     private static long SOCRA_ID;
     private static long DEVOPS_ID;
     private static long MANAGEMENT_ID;
@@ -68,7 +68,7 @@ public class ProgramServiceTest {
                 }})
                 .build();
         ProgramModel programModel = programService.create(createProgramRequest);
-        Assertions.assertTrue(programModel.getTitle().equals(title));
+        Assertions.assertEquals(programModel.getTitle(), title);
         Assertions.assertEquals(1, programModel.getSubjects().get(1).size());
     }
 
@@ -103,7 +103,7 @@ public class ProgramServiceTest {
                 .price(500)
                 .remotePercentage(50.0)
                 .startDate(Date.valueOf("2024-06-06"))
-                .subjects(new ArrayList<ProgramSubjectRequest>() {{
+                .subjects(new ArrayList<>() {{
                     add(ProgramSubjectRequest.builder().subjectId(SOCRA_ID).semesterIndex(1).build());
                     add(ProgramSubjectRequest.builder().subjectId(DEVOPS_ID).semesterIndex(1).build());
                 }})
@@ -122,7 +122,7 @@ public class ProgramServiceTest {
                 .subjectsToRemoveFromProgram(List.of(SOCRA_ID))
                 .build();
         programModel = programService.update(programModel.getId(), updateProgramRequest);
-        Assertions.assertTrue(programModel.getTitle().equals(newTitle));
+        Assertions.assertEquals(programModel.getTitle(), newTitle);
         Assertions.assertEquals(2, programModel.getSubjects().get(2).size());
         Assertions.assertFalse(programModel.getSubjects().get(2).stream().filter(s -> s.getTitle().equals("DEVOPS")).toList().isEmpty());
         Assertions.assertFalse(programModel.getSubjects().get(2).stream().filter(s -> s.getTitle().equals("MANAGEMENT")).toList().isEmpty());
