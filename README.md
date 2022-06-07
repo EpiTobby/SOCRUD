@@ -26,12 +26,17 @@ with the most relevant courses for him.
 * Export program as PDF
 
 # Documentation
-All endpoint are documented using Swagger-ui.\
+All endpoints are documented using Swagger-ui.\
 The Swagger-ui documentation can be found at `swagger-ui/index.html`.
 
 # Usage
 Run `docker-compose up`\
-This command will download all the necessary images and start the application.
+This command will download all the necessary images and start the application.\
+Some endpoints require the user to be authenticated with an admin account. A default admin user can be created with the following command:
+```bash
+echo "DEFAULT_USERNAME=root
+DEFAULT_PASSWORD=root" > .env && docker-compose up
+```
 
 # Tests
 Run `mvn test`
