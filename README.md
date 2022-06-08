@@ -31,7 +31,8 @@ The Swagger-ui documentation can be found at `swagger-ui/index.html`.
 
 # Usage
 Run `docker-compose up`\
-This command will download all the necessary images and start the application.\
+This command will download all the necessary images and start the application.
+
 Some endpoints require the user to be authenticated with an admin account. A default admin user can be created with the following command:
 ```bash
 echo "DEFAULT_USERNAME=root
@@ -43,8 +44,8 @@ Run `mvn test`
 
 # Design Pattern
 We have implemented 2 design patterns:
-* Builder in models/request/UpdateSubjectRequest.java
-* Template in service/ProgramComparatorTemplate.java
+* Builder in [UpdateSubjectRequest.java](https://github.com/EpiTobby/SOCRUD/blob/master/src/main/java/fr/tobby/socrud/model/request/UpdateSubjectRequest.java). The builder is useful to build in a convinient and explanatory way objects that require several arguments. It can come particularly handy while making tests. The builder in this class is for demonstration purposes, in other classes we use the `@Builder` shortcut annotation from lombok.
+* Template in [ProgramComparatorTemplate.java](https://github.com/EpiTobby/SOCRUD/blob/master/src/main/java/fr/tobby/socrud/service/ProgramComparator.java). This design pattern is used to make an algorithm which implementation can change over time. It defines a general behavior while leaving implementation details to subclasses. This way we can provide several variants of the algorithm regrouped under the same interface and usage. In the scope of this project, as the code is not destined to evolve, this is clearly a YAGNI anti pattern.
 
 # CICD
 A CICD pipeline is setup and is composed of the following steps:
