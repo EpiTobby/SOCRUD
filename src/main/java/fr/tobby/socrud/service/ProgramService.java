@@ -13,16 +13,16 @@ import fr.tobby.socrud.model.request.ProgramSubjectRequest;
 import fr.tobby.socrud.model.request.UpdateProgramRequest;
 import fr.tobby.socrud.repository.DegreesRepository;
 import fr.tobby.socrud.repository.ProgramRepository;
-import org.jetbrains.annotations.Nullable;
 import fr.tobby.socrud.repository.ProgramSubjectRepository;
 import fr.tobby.socrud.repository.SubjectRepository;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Service
 public class ProgramService {
@@ -43,11 +43,15 @@ public class ProgramService {
         return programEntities.stream().map(ProgramModel::of).toList();
     }
 
-    public List<ProgramModel> getAllOrdered(@Nullable String campus, @Nullable String degree) {
+    public List<ProgramModel> getAllOrdered(@Nullable String campus, @Nullable String degree, @Nullable Double remotePercentage,
+                                            @Nullable Integer durationMonth)
+    {
         List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
         Predicate<ProgramModel> predicate = model -> {
             return (campus == null || model.getCampus().equals(campus))
-                    && (degree == null || model.getDegree().equals(degree));
+                    && (degree == null || model.getDegree().equals(degree))
+                    && (remotePercentage == null || model.getRemotePercentage() == remotePercentage)
+                    && (durationMonth == null || model.getDurationMonths() == durationMonth);
         };
         return programEntities.stream().map(ProgramModel::of)
                               .filter(predicate)
