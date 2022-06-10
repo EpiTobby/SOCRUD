@@ -19,8 +19,7 @@ public final class ProgramModel implements Searchable {
     private final String title;
     @NotNull
     private final String campus;
-    @NotNull
-    private final Integer durationMonths;
+    private final int durationMonths;
     @NotNull
     private final String degree;
     private final int price;
