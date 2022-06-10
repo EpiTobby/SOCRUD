@@ -48,8 +48,8 @@ public class ProgramService {
     {
         List<ProgramEntity> programEntities = programRepository.findAllByOrderByStartDate();
         Predicate<ProgramModel> predicate = model -> {
-            return (campus == null || model.getCampus().equals(campus))
-                    && (degree == null || model.getDegree().equals(degree))
+            return (campus == null || model.getCampus().equalsIgnoreCase(campus))
+                    && (degree == null || model.getDegree().equalsIgnoreCase(degree))
                     && (remotePercentage == null || model.getRemotePercentage() == remotePercentage)
                     && (durationMonth == null || model.getDurationMonths() == durationMonth);
         };
