@@ -30,7 +30,7 @@ All endpoints are documented using Swagger-ui.\
 The Swagger-ui documentation can be found at `swagger-ui/index.html`.
 
 # Usage
-Run `docker-compose up`\
+Clone the repo and run `docker-compose up`\
 This command will download all the necessary images and start the application.
 
 Some endpoints require the user to be authenticated with an admin account. A default admin user can be created with the following command:
@@ -38,6 +38,7 @@ Some endpoints require the user to be authenticated with an admin account. A def
 echo "DEFAULT_USERNAME=root
 DEFAULT_PASSWORD=root" > .env && docker-compose up
 ```
+You can then login on /admin/login using `root` as username and password and use the returned jwt for subsequent requests.
 
 # Tests
 Run `mvn test`
