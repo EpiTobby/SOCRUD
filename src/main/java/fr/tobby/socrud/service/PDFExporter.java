@@ -1,15 +1,14 @@
 package fr.tobby.socrud.service;
 
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.List;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import fr.tobby.socrud.model.ProgramModel;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -48,7 +47,7 @@ public class PDFExporter {
         writeTableLine(table, "Titre", programModel.getTitle());
         writeTableLine(table, "Description", programModel.getDescription());
         writeTableLine(table, "Campus", programModel.getCampus());
-        writeTableLine(table, "Durée", programModel.getDurationMonths().toString());
+        writeTableLine(table, "Durée", String.valueOf(programModel.getDurationMonths()));
         writeTableLine(table, "Type", programModel.getDegree());
         writeTableLine(table, "Tarif", String.valueOf(programModel.getPrice()));
         writeTableLine(table, "Présentiel", String.valueOf(programModel.getRemotePercentage()));
