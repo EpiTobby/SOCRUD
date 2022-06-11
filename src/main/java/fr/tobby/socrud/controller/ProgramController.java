@@ -38,8 +38,12 @@ public class ProgramController {
     @GetMapping(path = "")
     @Operation(summary = "Get all the programs")
     @ApiResponse(responseCode = "200", description = "Returns all the programs")
-    public Collection<ProgramModel> getPrograms() {
-        return programService.getAllOrdered();
+    public Collection<ProgramModel> getPrograms(@RequestParam(name = "campus", required = false) String campus,
+                                                @RequestParam(name = "degree", required = false) String degree,
+                                                @RequestParam(name = "remotePercentage", required = false) Double remotePercentage,
+                                                @RequestParam(name = "durationMonth", required = false) Integer durationMonth)
+    {
+        return programService.getAllOrdered(campus, degree, remotePercentage, durationMonth);
     }
 
     @GetMapping("search")
