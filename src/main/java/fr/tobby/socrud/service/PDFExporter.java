@@ -43,11 +43,11 @@ public class PDFExporter {
         writeTableLine(table, "Titre", programModel.getTitle());
         writeTableLine(table, "Description", programModel.getDescription());
         writeTableLine(table, "Campus", programModel.getCampus());
-        writeTableLine(table, "Durée", String.valueOf(programModel.getDurationMonths()));
+        writeTableLine(table, "Durée", String.valueOf(programModel.getDurationMonths()) + " mois");
         writeTableLine(table, "Type", programModel.getDegree());
-        writeTableLine(table, "Tarif", String.valueOf(programModel.getPrice()));
-        writeTableLine(table, "Présentiel", String.valueOf(programModel.getRemotePercentage()));
-        writeTableLine(table, "Début", programModel.getStartDate().toString());
+        writeTableLine(table, "Tarif", String.valueOf(programModel.getPrice()) + "€");
+        writeTableLine(table, "Distanciel", String.valueOf(programModel.getRemotePercentage()) + "%");
+        writeTableLine(table, "Début", programModel.getStartDate().toLocaleString().split(",")[0]);
 
         document.add(table);
     }
@@ -58,7 +58,7 @@ public class PDFExporter {
 
 
             List subjectList = new List(true, false, 10);
-            subjects.forEach(subject -> subjectList.add(new ListItem(subject.getTitle() + " : " + subject.getDescription())));
+            subjects.forEach(subject -> subjectList.add(new ListItem(" " + subject.getTitle() + " : " + subject.getDescription())));
 
             semesterTitle.add(subjectList);
             document.add(semesterTitle);
