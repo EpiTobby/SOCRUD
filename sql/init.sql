@@ -148,53 +148,73 @@ INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (1,
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (1, 5, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (1, 6, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 7, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 8, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 9, 2);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 10, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (2, 11, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 12, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 13, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 14, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (3, 15, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 16, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 17, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 18, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (4, 19, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 20, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 21, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 22, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (5, 23, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 24, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 25, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 26, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (6, 27, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 28, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 29, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 30, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (7, 31, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 32, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 33, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 34, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 35, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (8, 36, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 37, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 38, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 39, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (9, 40, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 41, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 42, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 43, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (10, 44, 1);
 
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 1, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 2, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 45, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 46, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 47, 1);
