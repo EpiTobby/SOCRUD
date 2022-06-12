@@ -36,19 +36,29 @@ public class TokenManager {
 
     public String generateFor(String username, final long userId)
     {
+        return generateFor(username, userId, Instant.now());
+    }
+
+    public String generateFor(String username, final long userId, Instant now)
+    {
         final HashMap<String, Object> claims = new HashMap<>();
 
         claims.put("userId", userId);
         return Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(Date.from(Instant.now().plus(10, ChronoUnit.DAYS)))
-                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(now.plus(10, ChronoUnit.DAYS)))
+                .setIssuedAt(Date.from(now))
                 .setSubject(username)
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 
     public UserDetails verifyToken(final String tokenString) throws TokenVerificationException
+    {
+        return verifyToken(tokenString, Instant.now());
+    }
+
+    public UserDetails verifyToken(final String tokenString, Instant now) throws TokenVerificationException
     {
         Claims claims;
         try
@@ -63,7 +73,7 @@ public class TokenManager {
             throw new TokenParsingException(e);
         }
 
-        if (claims.getExpiration().before(Date.from(Instant.now())))
+        if (claims.getExpiration().before(Date.from(now)))
             throw new TokenExpiredException();
         String username = claims.getSubject();
         return userDetailsService.loadUserByUsername(username);
