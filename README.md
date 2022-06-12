@@ -1,4 +1,8 @@
 # SOCRUD
+[![CircleCI](https://circleci.com/gh/EpiTobby/SOCRUD/tree/master.svg?style=svg&circle-token=28bdad8d364b9293d2505594c58e15188dbfe5c9)](https://circleci.com/gh/EpiTobby/SOCRUD/tree/master)
+[![Java CI with Maven](https://github.com/EpiTobby/SOCRUD/actions/workflows/maven.yml/badge.svg)](https://github.com/EpiTobby/SOCRUD/actions/workflows/maven.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=EpiTobby_SOCRUD&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=EpiTobby_SOCRUD)
+
 SOCRUD is a REST API made in Java Spring Boot meeting the following need :
 ```
 As a pedagogical manager in a new university, I need to digitalize the process 
