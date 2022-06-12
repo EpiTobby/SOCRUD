@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-public class SubjectServiceTest{
+class SubjectServiceTest{
     private SubjectService subjectService;
 
     @Autowired
@@ -29,7 +29,7 @@ public class SubjectServiceTest{
                 .description("description for subject1")
                 .build();
         long id = subjectService.createSubject(request).getId();
-        Assertions.assertTrue(subjectService.getById(id).getTitle().equals("subject1"));
+        Assertions.assertEquals("subject1", subjectService.getById(id).getTitle());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SubjectServiceTest{
                 .description(newDescr)
                 .build();
         subjectService.updateSubject(id, updateSubjectRequest);
-        Assertions.assertTrue(subjectService.getById(id).getDescription().equals(newDescr));
+        Assertions.assertEquals(subjectService.getById(id).getDescription(), newDescr);
     }
 
     @Test

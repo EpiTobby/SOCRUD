@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -17,7 +18,7 @@ public class UpdateProgramRequest {
     @Nullable
     private final String campus;
     @Nullable
-    private final String durationMonths;
+    private final Integer durationMonths;
     @Nullable
     private final String degree;
     @Nullable
@@ -28,16 +29,8 @@ public class UpdateProgramRequest {
     private final Date startDate;
     @Nullable
     private final String description;
-
-    public static UpdateProgramRequest of(ProgramEntity entity) {
-        return UpdateProgramRequest.builder()
-                .title(entity.getTitle())
-                .campus(entity.getCampus())
-                .durationMonths(entity.getDurationMonths())
-                .degree(entity.getDegree().getTitle())
-                .price(entity.getPrice())
-                .remotePercentage(entity.getRemotePercentage())
-                .startDate(entity.getStartDate())
-                .description(entity.getDescription()).build();
-    }
+    @Nullable
+    private final List<ProgramSubjectRequest> subjects;
+    @Nullable
+    private List<Long> subjectsToRemoveFromProgram;
 }
