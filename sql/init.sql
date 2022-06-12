@@ -136,6 +136,19 @@ INSERT INTO subjects (id, title, description) values (46, 'PCEQ', 'Points clés 
 INSERT INTO subjects (id, title, description) values (47, 'CALCROI', 'Calcul de ROI en Télécom');
 INSERT INTO subjects (id, title, description) values (48, 'SNA1', 'Réseaux SNA [niveau-1]');
 
+/* SPE */
+
+INSERT INTO subjects(id, title, description) values (49, 'maths', 'Mathématiques');
+INSERT INTO subjects(id, title, description) values (50, 'prog', 'Programmation');
+INSERT INTO subjects(id, title, description) values (51, 'archi', 'Architecture');
+INSERT INTO subjects(id, title, description) values (52, 'angl', 'Anglais');
+INSERT INTO subjects(id, title, description) values (53, 'elec', 'Electronique');
+INSERT INTO subjects(id, title, description) values (54, 'te', 'Technique d''expression');
+
+/* SUP */
+INSERT INTO subjects(id, title, description) values (55, 'phys', 'Physiques');
+
+
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (1, 'MTI', 'Multimedia et technologies de l''information', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (2, 'IMAGE', 'TRAITEMENT, SYNTHESE ET ANALYSE D’IMAGES', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (3, 'SCIA', 'DATA SCIENCE ET INTELLIGENCE ARTIFICIELLE', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
@@ -147,6 +160,9 @@ INSERT INTO programs (id, title, description, campus, duration_months, degree_id
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (9, 'SRS', 'Systèmes, Réseaux et Sécurité', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (10, 'STARTUP', 'Startup', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
 INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (11, 'TCOM', 'Télécommunications', 'EPITA KB', 12, 3, '50000', 10, '2019-01-01');
+
+INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (12, 'SPE', 'Seconde année du cycle préparatoire', 'EPITA VJ', 12, 2, '45000', 0, '2019-01-01');
+INSERT INTO programs (id, title, description, campus, duration_months, degree_id, tarif, remote_percentage, start_date) VALUES (13, 'SUP', 'Première année du cycle préparatoire', 'EPITA VJ', 12, 2, '45000', 0, '2019-01-01');
 
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (1, 1, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (1, 2, 1);
@@ -226,3 +242,18 @@ INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 46, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 47, 1);
 INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (11, 48, 1);
+
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 49, 2);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 50, 2);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 51, 2);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 52, 2);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 53, 2);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (12, 54, 2);
+
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 49, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 50, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 51, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 52, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 53, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 54, 1);
+INSERT INTO program_subjects (program_id, subject_id, semester_index) VALUES (13, 55, 1);
